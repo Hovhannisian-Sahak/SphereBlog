@@ -8,6 +8,7 @@ export enum userTypes {
   timestamps: true,
 })
 export class Users extends Document {
+  [key: string]: any;
   @Prop({ required: true })
   name: string;
   @Prop({ required: true })
