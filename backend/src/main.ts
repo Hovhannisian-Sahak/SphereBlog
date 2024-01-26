@@ -5,10 +5,13 @@ import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 
 import express from 'express';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
+  // app.use(AuthMiddleware);
   app.use(cors());
+  app.setGlobalPrefix(process.env.APP_PREFIX);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.use(express.urlencoded({ extended: true }));
 

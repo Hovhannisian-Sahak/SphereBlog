@@ -31,14 +31,9 @@ export class UsersController {
   async signup(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
     try {
       //validate Dto
-      const errors = await validate(createUserDto);
-      if (errors.length > 0) {
-        console.log(errors);
-      }
+      await validate(createUserDto);
       //calling service function
       const newUser = await this.usersService.createUser(createUserDto);
-      //pull out passsword from response
-
       return {
         success: true,
         message:
@@ -65,14 +60,13 @@ export class UsersController {
   ): Promise<UserResponseDto> {
     try {
       //validating DTO
-      const errors = await validate(loginUserDto);
-      if (errors.length > 0) {
-        console.log(errors);
-      }
+      await validate(loginUserDto);
+
       //calling service function
       const loginRes = await this.usersService.login(loginUserDto);
       //save token in cookies
       response.cookie('auth_token', loginRes?.token, { httpOnly: true });
+      //delete token from response
       delete loginRes?.token;
       return {
         success: true,
@@ -104,20 +98,12 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserResponseDto> {
     try {
-      const errors = await validate({
-        name: updateUserDto.name,
-        oldPassword: updateUserDto.oldPassword,
-        newPassword: updateUserDto.newPassword,
-      });
-
-      if (errors.length > 0) {
-        console.log(errors);
-      }
-      const updateRes = await this.usersService.updateUser(id, updateUserDto);
+      await validate(updateUserDto);
+      const updatedUser = await this.usersService.updateUser(id, updateUserDto);
       return {
         success: true,
         message: 'User updated successfully',
-        result: updateRes,
+        result: updatedUser,
       };
     } catch (error) {
       return {

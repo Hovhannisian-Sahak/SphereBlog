@@ -8,13 +8,14 @@ export class Posts extends Document {
   title: string;
   @Prop({ required: true })
   description: string;
-  @Prop({ required: true })
-  image: string;
-  @Prop({ type: Object })
-  imageDetails: Record<string, any>;
-  @Prop({ type: Types.ObjectId, ref: 'Users', required: true })
+  @Prop({
+    default:
+      'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg',
+  })
+  imageUrl?: string;
+  @Prop({ type: Types.ObjectId, ref: 'Users' })
   userId: Types.ObjectId;
 }
-export const postSchema = SchemaFactory.createForClass(Posts);
+export const PostSchema = SchemaFactory.createForClass(Posts);
 // upvotes: { type: Number },
 // downvotes: { type: Number },

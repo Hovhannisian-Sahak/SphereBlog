@@ -12,6 +12,6 @@ export class Comments extends Document {
   @Prop({ type: Types.ObjectId, ref: 'Users', required: true })
   userId: Types.ObjectId;
 }
-export const commentSchema = SchemaFactory.createForClass(Comments);
+export const CommentSchema = SchemaFactory.createForClass(Comments);
 // upvotes: { type: Number },
 // downvotes: { type: Number },

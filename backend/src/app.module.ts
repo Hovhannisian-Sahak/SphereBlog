@@ -16,7 +16,7 @@ dotenv.config();
     PostsModule,
     CommentsModule,
   ],
-  controllers: [AppController, CommentsController],
-  providers: [AppService, CommentsService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -23,10 +23,7 @@ export class UsersService implements IUsersService {
   async createUser(createUserDto: CreateUserDto): Promise<Users> {
     try {
       //validate DTO
-      const errors = await validate(createUserDto);
-      if (errors.length > 0) {
-        console.log(errors);
-      }
+      await validate(createUserDto);
       //generate password hash
       createUserDto.password = await generatePasswordHash(
         createUserDto.password,
@@ -64,10 +61,7 @@ export class UsersService implements IUsersService {
   ): Promise<{ user: Users; token: string }> {
     try {
       //validate DTO
-      const errors = await validate(loginUserDto);
-      if (errors.length > 0) {
-        console.log(errors);
-      }
+      await validate(loginUserDto);
       //check if email and password are valid
 
       const { email, password } = loginUserDto;
@@ -91,10 +85,7 @@ export class UsersService implements IUsersService {
   async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<Users> {
     try {
       //validate DTO
-      const errors = await validate(updateUserDto);
-      if (errors.length > 0) {
-        console.log(errors);
-      }
+      await validate(updateUserDto);
       const { name, oldPassword, newPassword } = updateUserDto;
       //check if both are undefined
       if (!name && !newPassword) {
