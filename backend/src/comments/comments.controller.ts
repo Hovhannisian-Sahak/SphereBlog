@@ -84,9 +84,7 @@ export class CommentsController {
     @Param('id') id: string,
   ): Promise<CommentResponseDto> {
     try {
-      console.log('start controller');
       await this.commentService.delete(req.user._id, id);
-      console.log('end controller');
       return {
         success: true,
         message: 'Comment deleted successfully',

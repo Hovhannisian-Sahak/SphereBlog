@@ -1,6 +1,5 @@
 import { UpdatePostDto } from './dto/update-post-dto';
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -15,12 +14,10 @@ import {
 } from '@nestjs/common';
 import { IPostsService } from './post.service.interface';
 import { CreatePostDto } from './dto/create-post-dto';
-import { Posts } from 'src/shared/schema/posts';
 import { Roles } from 'src/shared/middleware/role.decorator';
 import { userTypes } from 'src/shared/schema/users';
 import { PostResponseDto } from './dto/post-response-dto';
 import { validate } from 'class-validator';
-import { UserResponseDto } from 'src/users/dto/user-response.dto';
 
 @Controller('posts')
 export class PostsController {

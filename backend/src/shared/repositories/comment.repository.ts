@@ -17,21 +17,6 @@ export class CommentsRepository implements ICommentsRepository {
   async find(query: any): Promise<Comments[]> {
     return await this.commentModel.find(query);
   }
-  async findOneAndUpdate(query: any, update: any) {
-    const product = await this.commentModel.findOneAndUpdate(query, update, {
-      new: true,
-    });
-    return product;
-  }
-  async getAll(): Promise<Comments[]> {
-    return await this.commentModel.find();
-  }
-  async findById(id: string): Promise<Comments | undefined> {
-    return await this.commentModel.findById(id);
-  }
-  async updateOne(query: any, data: Record<string, any>) {
-    return await this.commentModel.updateOne(query, data);
-  }
   async deleteOne(query: any) {
     return await this.commentModel.findOneAndDelete(query);
   }

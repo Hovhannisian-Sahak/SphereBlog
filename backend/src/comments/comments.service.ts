@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { CreateCommentDto } from './dto/create-comment-dto';
-import { Types } from 'mongoose';
 import { IPostsRepository } from 'src/shared/repositories/post.repository.interface';
 import { ICommentsService } from './comments.service.interface';
 import { ICommentsRepository } from 'src/shared/repositories/comment.repository.interface';
@@ -65,11 +64,9 @@ export class CommentsService implements ICommentsService {
   }
   async delete(userId: string, id: string) {
     try {
-      console.log('start service');
       const comment = await this.commentModel.findOne({ _id: id });
       console.log(comment);
       if (!comment) {
-        console.log('chka');
         throw new NotFoundException('Comment not found');
       }
       //check current user
@@ -80,7 +77,6 @@ export class CommentsService implements ICommentsService {
       }
 
       await this.commentModel.deleteOne({ _id: id });
-      console.log('end service');
     } catch (error) {
       throw error;
     }

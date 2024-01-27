@@ -14,14 +14,10 @@ export class UsersRepository implements IUsersRepository {
   async findOne(query: any) {
     return await this.userModel.findOne(query);
   }
-  async getAll(): Promise<Users[]> {
-    return await this.userModel.find();
-  }
   async findById(id: string): Promise<Users | undefined> {
     return await this.userModel.findById(id);
   }
   async updateOne(query: any, data: Record<string, any>) {
     return await this.userModel.updateOne(query, data);
   }
-  
 }

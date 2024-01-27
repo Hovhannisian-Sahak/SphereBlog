@@ -47,7 +47,6 @@ export class PostsService {
   async getAllPosts(): Promise<Posts[]> {
     try {
       const posts = await this.postModel.getAll();
-      console.log(posts);
       if (!posts || posts.length === 0) {
         throw new NotFoundException('posts are not found');
       }
@@ -86,18 +85,16 @@ export class PostsService {
   async delete(userId: string, id: string) {
     try {
       const post = await this.postModel.findOne({ _id: id });
-      console.log(post);
       if (!post) {
         throw new NotFoundException('Blog post not found');
       }
-      console.log('then');
       //check current user
       if (post.userId.toString() !== userId.toString()) {
         throw new UnauthorizedException('You are not the author of this post');
       }
-      console.log(post._id.toString());
-      console.log(id);
+      //delete comments of that post
       await this.commentModel.deleteMany({ postId: post._id.toString() });
+      //delete post
       await this.postModel.deleteOne({ _id: id });
     } catch (error) {
       throw error;
@@ -106,7 +103,6 @@ export class PostsService {
   async deleteByAdmin(id: string) {
     try {
       const post = await this.postModel.findOne({ _id: id });
-      console.log(post);
       if (!post) {
         throw new Error('Blog post not found');
       }
