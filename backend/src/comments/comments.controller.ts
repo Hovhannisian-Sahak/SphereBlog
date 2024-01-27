@@ -78,7 +78,6 @@ export class CommentsController {
   }
 
   @Delete(':id')
-  @HttpCode(204)
   @Roles(userTypes.CUSTOMER)
   async delete(
     @Req() req: any,
@@ -103,7 +102,6 @@ export class CommentsController {
     }
   }
   @Delete('/admin/:id')
-  @HttpCode(204)
   @Roles(userTypes.ADMIN)
   async deleteByAdmin(@Param('id') id: string): Promise<CommentResponseDto> {
     try {

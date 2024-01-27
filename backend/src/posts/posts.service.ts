@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Inject,
   Injectable,
   NotFoundException,
@@ -10,7 +9,6 @@ import { CreatePostDto } from './dto/create-post-dto';
 import { Posts } from 'src/shared/schema/posts';
 import { UpdatePostDto } from './dto/update-post-dto';
 import { validate } from 'class-validator';
-import mongoose from 'mongoose';
 import { ICommentsRepository } from 'src/shared/repositories/comment.repository.interface';
 
 @Injectable()

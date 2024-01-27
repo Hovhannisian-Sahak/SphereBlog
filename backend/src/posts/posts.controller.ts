@@ -128,7 +128,6 @@ export class PostsController {
     }
   }
   @Delete(':id')
-  @HttpCode(204)
   @Roles(userTypes.CUSTOMER)
   async delete(
     @Req() req: any,
